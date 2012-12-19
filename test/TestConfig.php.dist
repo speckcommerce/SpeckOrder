@@ -1,0 +1,16 @@
+<?php
+
+return array(
+    'modules' => array(
+        'ZfcBase',
+        'SpeckOrder',
+    ),
+    'module_listener_options' => array(
+        'extra_config' => array(
+        ),
+        'module_paths' => array(
+            'vendor',
+            //'devmodules',
+        ),
+    ),
+);
