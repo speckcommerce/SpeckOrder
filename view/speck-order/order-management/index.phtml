@@ -1,1 +1,14 @@
-<?php echo 'order management'; ?>
+<div class="row">
+    <div class="span4 shadow">
+        <h3>Search Orders</h3>
+        <form>
+            <input type="text" name="order_number" />
+            <input type="submit" />
+        </form>
+    </div>
+    <div class="span8 shadow">
+        <? foreach ($orders as $order) : ?>
+            <?=$this->render('/speck-order/order-management/order/row'); ?>
+        <? endforeach; ?>
+    </div>
+</div>
