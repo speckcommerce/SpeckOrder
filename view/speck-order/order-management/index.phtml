@@ -1,143 +1,55 @@
-<style>
-    .search-pane{
-        min-width:250px;
-    }
-    #order-search-panes{
-        margin:0; padding:0;
-    }
-    #order-search-panes div{
-        margin:0;
-        min-height: 200px;
-    }
-    #order-management{
-        width:100%;
-    }
-    #order-management div{
-        vertical-align: top;
-    }
+</div> <? //break out of the container div ?>
 
+<div class="container-fluid">
+    <div id="order-management" class="row-fluid">
 
-/* data tables stuff */
-
-div.dataTables_length label {
-    width: 460px;
-    float: left;
-    text-align: left;
-}
-div.dataTables_length select {
-    width: 75px;
-}
-div.dataTables_filter label {
-    float: right;
-    width: 460px;
-}
-div.dataTables_info {
-    padding-top: 8px;
-}
-div.dataTables_paginate {
-    float: right;
-    margin: 0;
-}
-table {
-    margin: 1em 0;
-    clear: both;
-}
-
-</style>
-
-<script type="text/javascript" src="/js/data-tables.js"></script>
-
-<div id="order-management" class="span12">
-
-    <div class="span3" id="order-search-panes">
-        <ul class="nav nav-tabs">
-            <li><a href="#search-order">Orders</a></li>
-            <li><a href="#search-customer">Customers</a></li>
-        </ul>
-        <div class="search-pane collapsed" id="search-customer">
-            Search Customers
+        <div class="span3" id="order-search-panes">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#search-order">Orders</a></li>
+                <li><a data-toggle="tab" href="#search-customer">Customers</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane search-pane" id="search-customer">
+                    Search Customers
+                </div>
+                <div class="active tab-pane search-pane" id="search-order">
+                    <?=$this->speckOrder()->orderSearchForm(true, array('attributes' => array('id' => 'order-search'))); ?>
+                </div>
+            </div>
         </div>
-        <div class="search-pane" id="search-order">
-            Search Orders
-            <form>
-                <input type="text" name="order_number" /><br/>
-                <input type="submit" />
-            </form>
+        <div class="span9">
+            <ul class="nav nav-tabs" id="order-manager-tabs">
+                <li class="active"><a data-toggle="tab" href="#order-pane">Orders</a></li>
+            </ul>
+            <div id="order-manager-tab-containers" class="tab-content row-fluid">
+
+                <div class="tab-pane active span12" id="order-pane">
+                    <table class="table table-striped table-bordered" id="orders">
+                        <thead>
+                            <tr>
+                                <th class="status">Status</th>
+                                <th class="flags">Flags</th>
+                                <th class="order_num">Order #</th>
+                                <th class="billto">Bill To</th>
+                                <th class="shipto">Ship To</th>
+                                <th class="total">Total</th>
+                                <th class="payment">Payment</th>
+                                <th class="csr">Assigned To</th>
+                                <th class="date_time">Date / Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <? foreach ($orders as $order) : ?>
+                                <?=$this->render('/speck-order/order-management/order/row'); ?>
+                            <? endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
         </div>
+
     </div>
-    <div class="span9">
-        <ul class="nav nav-tabs" id="order-manager-tabs">
-            <li><a href="#">Orders</a></li>
-        </ul>
-        <div id="order-manager-tab-containers">
-
-
-<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="orders">
-    <thead>
-        <tr>
-            <th>Status</th>
-            <th>Flags</th>
-            <th>Order #</th>
-            <th>Bill To</th>
-            <th>Ship To</th>
-            <th>Total</th>
-            <th>Payment</th>
-            <th>Assigned To</th>
-            <th>Date / Time</th>
-        </tr>
-    </thead>
-    <tbody>
-        <? foreach ($orders as $order) : ?>
-            <?=$this->render('/speck-order/order-management/order/row'); ?>
-        <? endforeach; ?>
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-    </div>
-
 </div>
 
-
-
-
-
-
-
-<script type="text/javascript">
-
-function newTab(title, content) {
-    html = "<li><a href=\"#\">" + title + "</a></li>"
-    $('#order-manager-tabs').append(html);
-}
-
-$('document').ready(function(){
-    newTab('foo', 'bar');
-    newTab('foo', 'bar');
-    newTab('foo', 'bar');
-    newTab('foo', 'bar');
-    newTab('foo', 'bar');
-    newTab('foo', 'bar');
-    newTab('foo', 'bar');
-    newTab('foo', 'bar');
-    newTab('foo', 'bar');
-    $('#example').dataTable( {
-        "sDom": "<'row'<'span4'l><'span4'f>r>t<'row'<'span4'i><'span4'p>>"
-    } );
-    $.extend( $.fn.dataTableExt.oStdClasses, {
-        "sWrapper": "dataTables_wrapper form-inline"
-    } );
-})
-
-</script>
+<div> <? //return to the container div ?>

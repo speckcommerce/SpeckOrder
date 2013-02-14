@@ -1,0 +1,18 @@
+<div class="row-fluid row-inline-block">
+    <div class="span5 address-block bill">
+        <strong>BILL TO:</strong>
+        <pre>
+            <?=$order['ship_address'];?>
+        </pre>
+    </div>
+    <div class="span5 address-block ship">
+        <strong>SHIP TO:</strong>
+        <pre>
+            <?=$order['bill_address'];?>
+        </pre>
+    </div>
+</div><br/>
+<div class="row-fluid">
+    <strong>Actions / Reports</strong>
+    <?= $this->navigation($this->actions)->menu(); ?>
+</div>
