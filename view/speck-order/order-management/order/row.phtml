@@ -1,0 +1,45 @@
+<tr>
+    <td>
+        <?//$status = $order->getStatus(); ?>
+        <?//=$this->speckOrder()->orderStatusToIcon($status); ?>
+        pending
+    </td>
+    <td>
+        <? //$flags = $order->getFlags(); ?>
+        <?//=$this->speckOrder()->flagsToIcons($flags); ?>
+        AEIOU
+    </td>
+    <td class="order_number" data-order_number="S123456">
+        <?//=$order->getOrderNumber(); ?>
+        S1234556
+    </td>
+    <td>
+        <?//=$order->getBilling()->getName(); ?>
+        Joe Schmo -
+        <?//=$order->getBilling()->getAddress(); ?>
+        <i>123 S St Gilbert AZ 85297</i>
+    </td>
+    <td>
+        <?//=$order->getShipping()->getName(); ?>
+        Joe Schmo -
+        <?//=$order->getShipping()->getAddress(); ?>
+        <i>123 S St Gilbert AZ 85297</i>
+    </td>
+    <td>
+        <?//=$order->getPrice(); ?>
+        $99.99
+    </td>
+    <td>
+        <?//$method=$order->getPayment()->getPaymentMethod(); ?>
+        <?//=$this->speckOrder()->paymentMethodToIcon($method); ?>
+        Visa
+    </td>
+    <td>
+        <?//=$order->getCsrName(); ?>
+        Tahni G
+    </td>
+    <td>
+        <?//=$order->getCompletedDateTime(); ?>
+        Today 12:11 pm
+    </td>
+</tr>

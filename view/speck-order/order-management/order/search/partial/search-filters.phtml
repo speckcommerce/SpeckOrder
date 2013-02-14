@@ -1,0 +1,32 @@
+<div class="search-filters">
+<? foreach ($filters as $filter) : ?>
+    <?
+        $hide = clone $filter;
+        $hide->setValue('hide')
+            ->setAttribute('title', 'hide');
+
+        $ignore = clone $filter;
+        $ignore->setValue('ignore')
+            ->setAttribute('title', 'ignore')
+            ->setAttribute('checked', 'checked');
+
+        $show = clone $filter;
+        $show->setValue('show')
+            ->setAttribute('title', 'show');
+    ?>
+    <div class="row-inline-block">
+        <div class="hide">
+            <?=$this->formInput($hide);?>
+        </div>
+        <div class="ignore">
+            <?=$this->formInput($ignore);?>
+        </div>
+        <div class="show">
+            <?=$this->formInput($show);?>
+        </div>
+        <div class="filter-label">
+            <?=$filter->getLabel();?>
+        </div>
+    </div>
+<? endforeach; ?>
+</div>
