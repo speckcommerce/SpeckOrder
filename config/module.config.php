@@ -61,7 +61,7 @@ $config = array(
                     'order_actions' => array(
                         'invoice' => array(
                             'type'  => 'uri',
-                            'uri'   => '/manage-order/{order_num}/invoice',
+                            'uri'   => '/manage-order/{order_id}/invoice',
                             'label' => 'View Invoice',
                             'title' => 'Invoice - Payment Due',
                         ),

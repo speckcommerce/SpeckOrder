@@ -1,32 +1,32 @@
-function orderTab(orderNum) {
+function orderTab(orderId) {
 
     //see if pane exists, then generate
-    pane = $('#' + orderNum + '.tab-pane');
+    pane = $('#' + orderId + '.tab-pane');
     if (pane.length == 0) {
-        tab  = '<li class="order-tab" data-order_number="' + orderNum + '"><a href="#' + orderNum + '" data-toggle="tab">' + orderNum + '<button class="close" type="button">×</button></a></li>'
-        pane = '<div class="tab-pane" id="' + orderNum + '"></div>';
+        tab  = '<li class="order-tab" data-order_id="' + orderId + '"><a href="#' + orderId + '" data-toggle="tab">' + orderId + '<button class="close" type="button">×</button></a></li>'
+        pane = '<div class="tab-pane" id="' + orderId + '"></div>';
         $('#order-manager-tabs').append(tab);
         $('#order-manager-tab-containers').append(pane);
-        $.post('/manage-order/' + orderNum, function(html){
-            $('#' + orderNum).append(html);
+        $.post('/manage-order/' + orderId, function(html){
+            $('#' + orderId).append(html);
         })
     }
     //switch to the tab + pane
-    $('#order-manager-tabs a[href="#' + orderNum + '"]').tab('show');
+    $('#order-manager-tabs a[href="#' + orderId + '"]').tab('show');
 }
 
 $('document').ready(function(){
 
     //on click of order row, open it in a tab.
     $('table.dataTable tbody tr').live('click', function(){
-        var num = $(this).find('.order_number').data('order_number');
-        orderTab(num);
+        var id = $(this).find('.order_id').data('order_id');
+        orderTab(id);
     });
 
     //close button removes order tab and pane.
     $('li.order-tab a button.close').live('click', function() {
         tab = $(this).parents('.order-tab').first()
-        paneId = $(tab).data('order_number');
+        paneId = $(tab).data('order_id');
         $('#order-manager-tabs a[href="#order-pane"]').tab('show');  //switch to orders tab
         $(tab).remove()             //remove the tab
         $('#' + paneId).remove();   //remove the pane

@@ -15,7 +15,7 @@ return array(
             'manage-order' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/manage-order/:orderNumber[/:actionName]',
+                    'route'    => '/manage-order/:orderId[/:actionName]',
                     'defaults' => array(
                         'controller' => 'order_management',
                         'action'     => 'order',

@@ -58,7 +58,7 @@ class OrderManagementController extends AbstractActionController
         var_dump($params); die('asdf');
     }
 
-    public function getOrder()
+    public function getOrder($id)
     {
         //$number  = $this->params('orderNumber');
         //$service = $this->getOrderService();
@@ -116,11 +116,11 @@ address;
 
         $nav = $this->getConfig('order_actions');
         $order = $this->getOrder();
-        $orderNum = 123456;
+        $orderId = 123456;
 
 
-        $search  = array('{order_num}');
-        $replace = array($orderNum);
+        $search  = array('{order_id}');
+        $replace = array($orderId);
         $vars    = array('order' => $order, 'search' => $search, 'replace' => $replace);
 
         $response = $this->getEventManager()->trigger(__FUNCTION__, $this, $vars);
@@ -176,9 +176,9 @@ address;
         if (count($postParams)) {
         }
 
-        $number  = $this->params('orderNubmer');
+        $orderId  = $this->params('orderId');
         //$service = $this->getOrderService();
-        //$flags   = $orderService->getFlags($number);
+        //$flags   = $orderService->getFlags($orderId);
         $flags   = array('foo', 'bar');
         $view    = $this->getView(false, array('flags' => $flags));
         return $view;
@@ -190,9 +190,9 @@ address;
         if (count($postParams)) {
         }
 
-        $number  = $this->params('orderNumber');
+        $orderId  = $this->params('orderId');
         //$service = $this->getOrderService();
-        //$notes   = $orderService->getNotes($number);
+        //$notes   = $orderService->getNotes($orderId);
         $notes   = array('note1', 'note2');
         $view    = $this->getView(false, array('notes' => $notes));
         return $view;
