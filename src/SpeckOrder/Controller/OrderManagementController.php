@@ -14,42 +14,21 @@ class OrderManagementController extends AbstractActionController
 
     public function init()
     {
-        $renderer = $this->getServiceLocator()->get('zendviewrendererphprenderer');
-        $renderer->plugin('headScript')->appendFile('/js/data-tables.js');
-        $renderer->plugin('headScript')->appendFile('/js/manage-orders.js');
-        $renderer->plugin('headLink')->appendStylesheet('/css/manage-orders.css');
-        $renderer->plugin('headLink')->appendStylesheet('/css/bootstrap-datatables.css');
+        $this->subLayout('/layout/speck-order');
     }
 
     public function indexAction()
     {
         $this->init();
-
-        $view = new ViewModel(array(
+        $data = array(
             'orders' => array(
                 'foo', 'bar', 'baz', 'baz',
                 'baz', 'baz', 'baz', 'baz',
                 'baz', 'foo', 'bar', 'baz',
                 'baz', 'baz', 'baz', 'baz',
-                'foo', 'bar', 'baz', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'baz', 'foo', 'bar', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'foo', 'bar', 'baz', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'baz', 'foo', 'bar', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'foo', 'bar', 'baz', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'baz', 'foo', 'bar', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'foo', 'bar', 'baz', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'baz', 'foo', 'bar', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-            )
-        ));
-        return $view;
+            ),
+        );
+        return new ViewModel($data);
     }
 
     public function invoice()
@@ -92,6 +71,12 @@ address;
         return $order;
     }
 
+    public function customerAction()
+    {
+        $this->init();
+        return new ViewModel();
+    }
+
     public function getConfig($key = null)
     {
         $config = $this->getServiceLocator()->get('speckorder_config');
@@ -105,6 +90,7 @@ address;
 
     public function orderAction()
     {
+        $this->init();
         $actionName = $this->params('actionName');
         if ($actionName && method_exists($this, $actionName))  {
             return $this->$actionName();
@@ -145,9 +131,21 @@ address;
             'placeHolders' => $this->renderOrderPlaceHolders(array('order' => $order, 'actions' => $nav)),
         );
 
-        $view  = $this->getView(false, $viewVars);
+        return new ViewModel($viewVars);
+    }
 
-        return $view;
+    public function customersAction()
+    {
+        $this->init();
+        $data = array(
+            'customers' => array(
+                'foo', 'bar', 'baz', 'baz',
+                'baz', 'baz', 'baz', 'baz',
+                'baz', 'foo', 'bar', 'baz',
+                'baz', 'baz', 'baz', 'baz',
+            )
+        );
+        return new ViewModel($data);
     }
 
     public function renderOrderPlaceHolders($vars, array $views = array())
@@ -204,19 +202,6 @@ address;
         if (count($postParams)) {
         }
 
-    }
-
-    public function getView($layout=true, array $vars = null)
-    {
-        $view = new ViewModel();
-        if ($layout === false) {
-            $view->setTerminal(true);
-        }
-        if (is_array($vars)) {
-            $view->setVariables($vars);
-        }
-
-        return $view;
     }
 
     /**

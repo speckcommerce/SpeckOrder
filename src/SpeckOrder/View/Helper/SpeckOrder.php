@@ -78,6 +78,37 @@ class SpeckOrder extends AbstractHelper implements ServiceLocatorAwareInterface,
         return $html;
     }
 
+    public function customerSearchForm($render = false, array $formOptions = array())
+    {
+        $form = $this->getServiceLocator()->get('speckorder_form_customersearch');
+        $data = $this->eventData(__FUNCTION__, array('form' => $form));
+        $form = $data['form'];
+
+        if (isset($formOptions['attributes'])) {
+            foreach ($formOptions['attributes'] as $attr => $val) {
+                $form->setAttribute($attr, $val);
+            }
+        }
+
+        if (!$render) {
+            return $form;
+        }
+
+        $view = $this->getView();
+        $html = $view->form()->openTag($form);
+        foreach($form->getElements() as $element) {
+            $html .= $view->formRow($element);
+        }
+        foreach($form->getFieldSets() as $fieldSet) {
+            $name    = $fieldSet->getName();
+            $partial = $this->getSearchFormFieldSetPartial($name);
+            $data    = $partial ? array($name => $fieldSet) : array('fieldSet' => $fieldSet);
+            $html   .= $view->partial($partial ?: $this->getSearchFormFieldSetPartial('default'), $data);
+        }
+        $html .= $view->form()->closeTag($form);
+
+        return $html;
+    }
     public function eventData($function, array $data)
     {
         $response = $this->getEventManager()->trigger($function, $this, $data);

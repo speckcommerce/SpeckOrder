@@ -1,14 +1,25 @@
+<p><strong>Order Number:</strong> <? echo '123456'; ?></p>
+<p><strong>Customer:</strong> <a href="/manage-customer/12345"><? echo 'johnsmith@domain.tld'; ?></a></p>
+
 <div class="row-fluid row-inline-block">
     <div class="span5 address-block bill">
         <strong>BILL TO:</strong>
         <pre>
             <?=$order['ship_address'];?>
+            <?//= $address->getShippingAddress(); ?>
+            <?//= $address->getFirstName() . " " . $address->getLastName() . "\n"; ?>
+            <?//= $address->getStreetAddress() . "\n" ?>
+            <?//= $address->getCity() . " " . $address->getProvince() . " " . $address->getPostalCode(); ?>
         </pre>
     </div>
     <div class="span5 address-block ship">
         <strong>SHIP TO:</strong>
         <pre>
             <?=$order['bill_address'];?>
+            <?//= $address->getBillingAddress(); ?>
+            <?//= $address->getFirstName() . " " . $address->getLastName() . "\n"; ?>
+            <?//= $address->getStreetAddress() . "\n" ?>
+            <?//= $address->getCity() . " " . $address->getProvince() . " " . $address->getPostalCode(); ?>
         </pre>
     </div>
 </div><br/>

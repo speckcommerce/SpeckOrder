@@ -12,6 +12,16 @@ return array(
                     ),
                 ),
             ),
+            'manage-customers' => array(
+                'type'    => 'Literal',
+                'options' => array(
+                    'route'    => '/manage-customers',
+                    'defaults' => array(
+                        'controller' => 'order_management',
+                        'action'     => 'customers',
+                    ),
+                ),
+            ),
             'manage-order' => array(
                 'type'    => 'Segment',
                 'options' => array(
@@ -19,6 +29,16 @@ return array(
                     'defaults' => array(
                         'controller' => 'order_management',
                         'action'     => 'order',
+                    ),
+                ),
+            ),
+            'manage-customer' => array(
+                'type'    => 'Segment',
+                'options' => array(
+                    'route'    => '/manage-customer/:orderId[/:actionName]',
+                    'defaults' => array(
+                        'controller' => 'order_management',
+                        'action'     => 'customer',
                     ),
                 ),
             ),

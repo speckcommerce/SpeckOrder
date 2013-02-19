@@ -29,6 +29,7 @@ $config = array(
             'speckorder_service_orderservice' => 'SpeckOrder\Service\OrderService',
             'speckorder_event_placeholder'    => 'SpeckOrder\Event\PlaceHolder',
             'speckorder_event_order'          => 'SpeckOrder\Event\Order',
+            'speckorder_form_customersearch'  => 'SpeckOrder\Form\CustomerSearch',
         ),
         'factories' => array(
             'speckorder_form_orderflags' => function ($sm) {
@@ -55,8 +56,8 @@ $config = array(
                     ),
                     'search_form_fieldset_partials' => array(
                         //relative to view directory
-                        'filters' => '/speck-order/order-management/order/search/partial/search-filters',
-                        'default' => '/speck-order/order-management/order/search/partial/search-fieldset',
+                        'filters' => '/speck-order/order-management/search/partial/search-filters',
+                        'default' => '/speck-order/order-management/search/partial/search-fieldset',
                     ),
                     'order_actions' => array(
                         'invoice' => array(
@@ -90,14 +91,17 @@ $config = array(
     'navigation' => array(
         'admin' => array(
             'manage-orders' => array(
-                'label' => 'Order Management',
+                'label' => 'Orders',
                 'route' => 'manage-orders',
             ),
         ),
     ),
     'view_manager' => array(
+        'template_map' => array(
+            'layout/speck-order' => __DIR__ . '/../view/layout/speck-order.phtml',
+        ),
         'template_path_stack' => array(
-            __DIR__ . '/../view'
+            __DIR__ . '/../view',
         ),
     ),
 );

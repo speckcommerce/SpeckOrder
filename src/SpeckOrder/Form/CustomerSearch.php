@@ -6,7 +6,7 @@ use Zend\Form\Form as ZendForm;
 use Zend\Form\FieldSet;
 use Zend\Form\Element;
 
-class OrderSearch extends ZendForm
+class CustomerSearch extends ZendForm
 {
     public function __construct()
     {
@@ -14,56 +14,35 @@ class OrderSearch extends ZendForm
 
         $text = new FieldSet('text');
         $text->add(array(
-            'name' => 'order_number',
+            'name' => 'name',
             'type' => '\Zend\Form\Element\Text',
             'options' => array(
-                'label' => 'Order #',
+                'label' => 'Name',
             ),
             'attributes' => array(
                 'class' => 'span12'
             ),
         ));
         $text->add(array(
-            'name' => 'ref_num',
+            'name' => 'email',
             'type' => '\Zend\Form\Element\Text',
             'options' => array(
-                'label' => 'Reference #',
+                'label' => 'Email',
             ),
             'attributes' => array(
                 'class' => 'span12'
             ),
         ));
         $text->add(array(
-            'name' => 'status',
+            'name' => 'phone',
             'type' => '\Zend\Form\Element\Text',
             'options' => array(
-                'label' => 'Status',
+                'label' => 'Phone',
             ),
             'attributes' => array(
                 'class' => 'span12'
             ),
         ));
-        $text->add(array(
-            'name' => 'created_time[start]',
-            'type' => '\Zend\Form\Element\Text',
-            'options' => array(
-                'label' => 'Created: Start',
-            ),
-            'attributes' => array(
-                'class' => 'span12 datepicker',
-            ),
-        ));
-        $text->add(array(
-            'name' => 'created_time[end]',
-            'type' => '\Zend\Form\Element\Text',
-            'options' => array(
-                'label' => 'Created: End',
-            ),
-            'attributes' => array(
-                'class' => 'span12 datepicker',
-            ),
-        ));
-
 
         $this->add($text);
 

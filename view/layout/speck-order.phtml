@@ -1,0 +1,23 @@
+<?
+    $this->plugin('headScript')->appendFile('/js/data-tables.js');
+    $this->plugin('headScript')->appendFile('/js/manage-orders.js');
+    $this->plugin('headScript')->appendFile('/js/input-labels.js');
+    $this->plugin('headLink')->appendStylesheet('/css/manage-orders.css');
+    $this->plugin('headLink')->appendStylesheet('/css/bootstrap-datatables.css');
+?>
+
+</div> <? //break out of the container div ?>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div id="search" class="span2">
+            <?=$this->render('/speck-order/order-management/search/index'); ?>
+        </div>
+        <div class="span10">
+            <div id="search-button" title="show/hide the search pane"><i class="icon-search"></i></div>
+            <?php echo $this->content; ?>
+        </div>
+    </div>
+</div>
+
+<div> <? //return to the container div ?>
