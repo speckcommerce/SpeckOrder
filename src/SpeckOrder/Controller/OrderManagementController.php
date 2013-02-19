@@ -12,14 +12,14 @@ class OrderManagementController extends AbstractActionController
     protected $orderService;
     protected $eventManager;
 
-    public function init()
+    public function initSubLayout()
     {
         $this->subLayout('/layout/speck-order');
     }
 
     public function indexAction()
     {
-        $this->init();
+        $this->initSubLayout();
         $data = array(
             'orders' => array(
                 'foo', 'bar', 'baz', 'baz',
@@ -73,7 +73,7 @@ address;
 
     public function customerAction()
     {
-        $this->init();
+        $this->initSubLayout();
         return new ViewModel();
     }
 
@@ -90,7 +90,7 @@ address;
 
     public function orderAction()
     {
-        $this->init();
+        $this->initSubLayout();
         $actionName = $this->params('actionName');
         if ($actionName && method_exists($this, $actionName))  {
             return $this->$actionName();
@@ -136,7 +136,7 @@ address;
 
     public function customersAction()
     {
-        $this->init();
+        $this->initSubLayout();
         $data = array(
             'customers' => array(
                 'foo', 'bar', 'baz', 'baz',
