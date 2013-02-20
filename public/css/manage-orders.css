@@ -11,6 +11,11 @@ body { padding:0 }
     margin:0; font-size:11px; line-height:11px
 }
 
+.search-filters {
+    padding-left:10px;
+    padding-bottom:10px;
+}
+
 #search-button {
     position: absolute; top:55px; left:-3px;
     border:1px solid #CCC;

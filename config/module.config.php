@@ -92,7 +92,11 @@ $config = array(
         'admin' => array(
             'manage-orders' => array(
                 'label' => 'Orders',
-                'route' => 'manage-orders',
+                'route' => 'zfcadmin/manage-orders',
+            ),
+            'manage-customers' => array(
+                'label' => 'Customers',
+                'route' => 'zfcadmin/manage-customers',
             ),
         ),
     ),

@@ -1,4 +1,7 @@
 <div class="search-filters">
+<? if (count($filters)) : ?>
+    <strong>Hide/Show Filters</strong>
+<? endif; ?>
 <? foreach ($filters as $filter) : ?>
     <?
         $hide = clone $filter;

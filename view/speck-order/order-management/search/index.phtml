@@ -4,11 +4,11 @@
 </ul>
 <div class="tab-content">
     <div class="tab-pane search-pane" id="search-customer">
-        <? $conf = array('attributes' => array('id' => 'customer-search', 'method' => 'POST', 'action' => '/manage-customers')); ?>
+        <? $conf = array('attributes' => array('id' => 'customer-search', 'method' => 'POST', 'action' => '/admin/manage-customers')); ?>
         <?=$this->speckOrder()->customerSearchForm(true, $conf); ?>
     </div>
     <div class="active tab-pane search-pane" id="search-order">
-        <? $conf = array('attributes' => array('id' => 'customer-search', 'method' => 'POST', 'action' => '/manage-orders')); ?>
+        <? $conf = array('attributes' => array('id' => 'customer-search', 'method' => 'POST', 'action' => '/admin/manage-orders')); ?>
         <?=$this->speckOrder()->orderSearchForm(true, $conf); ?>
     </div>
 </div>
