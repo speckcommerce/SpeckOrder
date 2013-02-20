@@ -74,7 +74,7 @@ $config = array(
                     ),
                 );
                 $smConfig = $sm->get('Config');
-                if($smConfig['speckorder']) {
+                if(isset($smConfig['speckorder'])) {
                     $config = \Zend\Stdlib\ArrayUtils::merge($config, $smConfig['speckorder']);
                 }
                 return $config;
