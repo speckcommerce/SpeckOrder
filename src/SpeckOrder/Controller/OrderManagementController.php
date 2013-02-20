@@ -101,7 +101,7 @@ address;
         }
 
         $nav = $this->getConfig('order_actions');
-        $order = $this->getOrder();
+        $order = $this->getOrder(123);
         $orderId = 123456;
 
 
