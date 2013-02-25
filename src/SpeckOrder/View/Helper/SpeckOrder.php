@@ -42,7 +42,6 @@ class SpeckOrder extends AbstractHelper implements ServiceLocatorAwareInterface,
         return $html;
     }
 
-
     public function orderSearchForm($render = false, array $formOptions = array())
     {
         $form = $this->getServiceLocator()->get('speckorder_form_ordersearch');
@@ -120,26 +119,26 @@ class SpeckOrder extends AbstractHelper implements ServiceLocatorAwareInterface,
         return $data;
     }
 
-    public function orderFlagsForm($orderNum = null, $checkedFlagIds = null, $render = false)
+    public function orderTagsForm($orderNum = null, $checkedTags = null, $render = false)
     {
-        if(!$checkedFlagIds && !$orderNum) {
-            throw new \RuntimeException('didnt get an ordernumber or array of checked flag ids');
+        if(!$checkedTags && !$orderNum) {
+            throw new \RuntimeException('didnt get an ordernumber or array of checked tags');
         }
 
-        if (!$checkedFlagIds) {
+        if (!$checkedTags) {
             //$order  = $this->getOrderService()->getOrder($orderNum);
-            //$checkedFlagIds = $order['flags'];
+            //$checkedTags = $order['tags'];
         }
 
-        $form = $this->getServiceLocator()->get('speckorder_form_orderflags');
+        $form = $this->getServiceLocator()->get('speckorder_form_ordertags');
         $data = $this->eventData(__FUNCTION__, array('form' => $form));
         $form = $data['form'];
 
 
-        $flags  = $this->getOrderService()->getAllFlags();
-        $values = array('flags' => $checkedFlagIds);
+        $tags  = $this->getOrderService()->getAllTags();
+        $values = array('tags' => $checkedTags);
 
-        $form->setFlags($flags);
+        $form->setTags($tags);
         $form->populateValues($values);
 
         if ($render === false) {

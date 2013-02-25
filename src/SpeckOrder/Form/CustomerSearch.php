@@ -20,7 +20,8 @@ class CustomerSearch extends ZendForm
                 'label' => 'Name',
             ),
             'attributes' => array(
-                'class' => 'span12'
+                'class' => 'span12',
+                'placeholder' => 'Name',
             ),
         ));
         $text->add(array(
@@ -30,7 +31,8 @@ class CustomerSearch extends ZendForm
                 'label' => 'Email',
             ),
             'attributes' => array(
-                'class' => 'span12'
+                'class' => 'span12',
+                'placeholder' => 'Email',
             ),
         ));
         $text->add(array(
@@ -40,7 +42,8 @@ class CustomerSearch extends ZendForm
                 'label' => 'Phone',
             ),
             'attributes' => array(
-                'class' => 'span12'
+                'class' => 'span12',
+                'placeholder' => 'Phone',
             ),
         ));
 

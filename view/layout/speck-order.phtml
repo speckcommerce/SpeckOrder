@@ -1,26 +1,31 @@
 <?
-    $this->plugin('headScript')->appendFile('/js/jquery-1.8.2.js');
-    $this->plugin('headScript')->appendFile('/js/jquery-ui-1.8.18.js');
-    $this->plugin('headScript')->appendFile('/js/bootstrap-tab.js');
-    $this->plugin('headScript')->appendFile('/js/data-tables.js');
-    $this->plugin('headScript')->appendFile('/js/manage-orders.js');
-    $this->plugin('headScript')->appendFile('/js/input-labels.js');
-    $this->plugin('headLink')->appendStylesheet('/css/manage-orders.css');
-    $this->plugin('headLink')->appendStylesheet('/css/bootstrap-datatables.css');
-?>
+$this->headLink()
+    ->prependStylesheet($this->basePath() . '/css/input-multivalue.css')
+    ->prependStylesheet($this->basePath() . '/css/manage-orders.css')
+    ->prependStylesheet($this->basePath() . '/css/bootstrap-datatables.css');
 
+$this->headScript()
+    ->prependFile($this->basePath() . '/js/jquery-ui-1.8.18.js')
+    ->prependFile($this->basePath() . '/js/bootstrap-tab.js')
+    ->prependFile($this->basePath() . '/js/data-tables.js')
+    ->prependFile($this->basePath() . '/js/manage-orders.js')
+    ->prependFile($this->basePath() . '/js/input-multivalue.js');
+?>
 </div> <? //break out of the container div ?>
 
-<div class="container-fluid">
-    <div class="row-fluid">
+<div id="speck-order-layout" class="container-fluid">
+    <div class="row-fluid layout-inner-wrap">
         <div id="search" class="span2">
             <?=$this->render('/speck-order/order-management/search/index'); ?>
         </div>
-        <div class="span10">
+        <div class="content span10">
             <div id="search-button" title="show/hide the search pane"><i class="icon-search"></i></div>
             <?php echo $this->content; ?>
         </div>
     </div>
+</div>
+
+<div id="search-hide" class="hide">
 </div>
 
 <div> <? //return to the container div ?>

@@ -1,9 +1,14 @@
 function toggleSearch(){
-    $('#search').toggleClass('hide');
-    $('#search').siblings().toggleClass('span12').toggleClass('span10');
+    if ($('#search').hasClass('hidden')) {
+        $('#speck-order-layout .layout-inner-wrap').prepend($('#search').removeClass('hidden'));
+        $('#speck-order-layout .content').removeClass('span12').addClass('span10');
+    } else {
+        $('#search-hide').prepend($('#search').addClass('hidden'));
+        $('#speck-order-layout .content').removeClass('span10').addClass('span12');
+    }
 }
 
-$('document').ready(function(){
+$(document).ready(function() {
 
     $('#search-button').click(function(){
         toggleSearch();
@@ -16,7 +21,6 @@ $('document').ready(function(){
         "sWrapper": "dataTables_wrapper form-inline"
     });
 
-    //datepickers for date range on search
     $('.datepicker').datepicker();
 
     //switch the parent layout to fluid

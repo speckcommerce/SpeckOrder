@@ -1,4 +1,3 @@
-body { padding:0 }
 .pane-datatable td, #cart-items td {font-size:11px}
 
 .row-inline-block > * {
@@ -37,9 +36,11 @@ body { padding:0 }
     background: none repeat scroll 0 0 #DDEEFF;
 }
 
-div.order_1 { margin-bottom:10px; width: 80%; float:left; }
-div.order_2 { margin-bottom:10px; width: 20%; float:left; }
-div.order_3 { border-top: 1px solid #DDDDDD; clear:both }
+#speck-order-layout { margin: 0 20px 0 40px; padding:0 }
+
+i.multivalue.ignore { background-color: #FFF; }
+i.multivalue.show { background-color: #0F0; }
+i.multivalue.hide { background-color: #F00; }
 
 #cart-items th.item       { width:50% }
 #cart-items th.uom-qty    { width:30% }
@@ -50,20 +51,4 @@ div.order_3 { border-top: 1px solid #DDDDDD; clear:both }
 .nav-tabs > li .close {
     margin: -2px 0 0 10px;
     font-size: 18px;
-}
-
-#search span {
-  position: absolute;
-  padding: 5px;
-  margin-left: 3px;
-  color: #999;
-  z-index: 1;
-  cursor: text;
-  pointer-events: none;
-}
-#search input, #order-search textarea, #order-search select {
-  z-index: 0;
-  padding: 6px;
-  margin: 0;
-  font: inherit;
 }

@@ -98,18 +98,23 @@ address;
 
         $postParams = $this->params()->fromPost();
         if (count($postParams)) {
+            //PRG
+            //service->updateOrder();
         }
 
-        $nav = $this->getConfig('order_actions');
         $order = $this->getOrder(123);
         $orderId = 123456;
 
 
-        $search  = array('{order_id}');
-        $replace = array($orderId);
-        $vars    = array('order' => $order, 'search' => $search, 'replace' => $replace);
 
-        $response = $this->getEventManager()->trigger(__FUNCTION__, $this, $vars);
+        //todo: move to order service
+        //      adjust events that use this
+        //$nav = $this->getOrderActionsNav($orderId);
+        $nav      = $this->getConfig('order_actions');
+        $search   = array('{order_id}');
+        $replace  = array($orderId);
+        $vars     = array('order' => $order, 'search' => $search, 'replace' => $replace);
+        $response = $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $vars);
         if(count($response)) {
             foreach ($response as $return) {
                 if(isset($return['actions'])) {
@@ -125,13 +130,15 @@ address;
         }
         $nav = Util\Misc::arrayStrReplace($search, $replace, $nav);
         $nav = new \Zend\Navigation\Navigation($nav);
+        $response = $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('nav' => $nav));
 
         $viewVars = array(
             'order'        => $order,
             'placeHolders' => $this->renderOrderPlaceHolders(array('order' => $order, 'actions' => $nav)),
         );
 
-        return new ViewModel($viewVars);
+        $view = new ViewModel($viewVars);
+        return $view;
     }
 
     public function customersAction()
