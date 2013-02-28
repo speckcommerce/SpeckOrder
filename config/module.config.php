@@ -48,11 +48,9 @@ $config = array(
                 $config = array(
                     'view_order_placeholders' => array(
                         //relative to view directory
-                        'header'    => '/speck-order/order-management/order/placeholder/header',
                         'content_1' => '/speck-order/order-management/order/placeholder/content-1',
                         'content_2' => '/speck-order/order-management/order/placeholder/content-2',
                         'content_3' => '/speck-order/order-management/order/placeholder/content-3',
-                        'footer'    => '/speck-order/order-management/order/placeholder/footer',
                     ),
                     'search_form_fieldset_partials' => array(
                         //relative to view directory
@@ -104,9 +102,6 @@ $config = array(
         ),
     ),
     'view_manager' => array(
-        'template_map' => array(
-            'layout/speck-order' => __DIR__ . '/../view/layout/speck-order.phtml',
-        ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
