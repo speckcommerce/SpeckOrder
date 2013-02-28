@@ -12,44 +12,23 @@ class OrderManagementController extends AbstractActionController
     protected $orderService;
     protected $eventManager;
 
-    public function init()
+    public function initSubLayout()
     {
-        $renderer = $this->getServiceLocator()->get('zendviewrendererphprenderer');
-        $renderer->plugin('headScript')->appendFile('/js/data-tables.js');
-        $renderer->plugin('headScript')->appendFile('/js/manage-orders.js');
-        $renderer->plugin('headLink')->appendStylesheet('/css/manage-orders.css');
-        $renderer->plugin('headLink')->appendStylesheet('/css/bootstrap-datatables.css');
+        $this->subLayout('/layout/speck-order');
     }
 
     public function indexAction()
     {
-        $this->init();
-
-        $view = new ViewModel(array(
+        $this->initSubLayout();
+        $data = array(
             'orders' => array(
                 'foo', 'bar', 'baz', 'baz',
                 'baz', 'baz', 'baz', 'baz',
                 'baz', 'foo', 'bar', 'baz',
                 'baz', 'baz', 'baz', 'baz',
-                'foo', 'bar', 'baz', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'baz', 'foo', 'bar', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'foo', 'bar', 'baz', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'baz', 'foo', 'bar', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'foo', 'bar', 'baz', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'baz', 'foo', 'bar', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'foo', 'bar', 'baz', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-                'baz', 'foo', 'bar', 'baz',
-                'baz', 'baz', 'baz', 'baz',
-            )
-        ));
-        return $view;
+            ),
+        );
+        return new ViewModel($data);
     }
 
     public function invoice()
@@ -58,7 +37,7 @@ class OrderManagementController extends AbstractActionController
         var_dump($params); die('asdf');
     }
 
-    public function getOrder()
+    public function getOrder($id)
     {
         //$number  = $this->params('orderNumber');
         //$service = $this->getOrderService();
@@ -92,6 +71,12 @@ address;
         return $order;
     }
 
+    public function customerAction()
+    {
+        $this->initSubLayout();
+        return new ViewModel();
+    }
+
     public function getConfig($key = null)
     {
         $config = $this->getServiceLocator()->get('speckorder_config');
@@ -105,6 +90,7 @@ address;
 
     public function orderAction()
     {
+        $this->initSubLayout();
         $actionName = $this->params('actionName');
         if ($actionName && method_exists($this, $actionName))  {
             return $this->$actionName();
@@ -112,18 +98,23 @@ address;
 
         $postParams = $this->params()->fromPost();
         if (count($postParams)) {
+            //PRG
+            //service->updateOrder();
         }
 
-        $nav = $this->getConfig('order_actions');
-        $order = $this->getOrder();
-        $orderNum = 123456;
+        $order = $this->getOrder(123);
+        $orderId = 123456;
 
 
-        $search  = array('{order_num}');
-        $replace = array($orderNum);
-        $vars    = array('order' => $order, 'search' => $search, 'replace' => $replace);
 
-        $response = $this->getEventManager()->trigger(__FUNCTION__, $this, $vars);
+        //todo: move to order service
+        //      adjust events that use this
+        //$nav = $this->getOrderActionsNav($orderId);
+        $nav      = $this->getConfig('order_actions');
+        $search   = array('{order_id}');
+        $replace  = array($orderId);
+        $vars     = array('order' => $order, 'search' => $search, 'replace' => $replace);
+        $response = $this->getEventManager()->trigger(__FUNCTION__.'.pre', $this, $vars);
         if(count($response)) {
             foreach ($response as $return) {
                 if(isset($return['actions'])) {
@@ -139,15 +130,29 @@ address;
         }
         $nav = Util\Misc::arrayStrReplace($search, $replace, $nav);
         $nav = new \Zend\Navigation\Navigation($nav);
+        $response = $this->getEventManager()->trigger(__FUNCTION__.'.post', $this, array('nav' => $nav));
 
         $viewVars = array(
             'order'        => $order,
             'placeHolders' => $this->renderOrderPlaceHolders(array('order' => $order, 'actions' => $nav)),
         );
 
-        $view  = $this->getView(false, $viewVars);
-
+        $view = new ViewModel($viewVars);
         return $view;
+    }
+
+    public function customersAction()
+    {
+        $this->initSubLayout();
+        $data = array(
+            'customers' => array(
+                'foo', 'bar', 'baz', 'baz',
+                'baz', 'baz', 'baz', 'baz',
+                'baz', 'foo', 'bar', 'baz',
+                'baz', 'baz', 'baz', 'baz',
+            )
+        );
+        return new ViewModel($data);
     }
 
     public function renderOrderPlaceHolders($vars, array $views = array())
@@ -176,9 +181,9 @@ address;
         if (count($postParams)) {
         }
 
-        $number  = $this->params('orderNubmer');
+        $orderId  = $this->params('orderId');
         //$service = $this->getOrderService();
-        //$flags   = $orderService->getFlags($number);
+        //$flags   = $orderService->getFlags($orderId);
         $flags   = array('foo', 'bar');
         $view    = $this->getView(false, array('flags' => $flags));
         return $view;
@@ -190,9 +195,9 @@ address;
         if (count($postParams)) {
         }
 
-        $number  = $this->params('orderNumber');
+        $orderId  = $this->params('orderId');
         //$service = $this->getOrderService();
-        //$notes   = $orderService->getNotes($number);
+        //$notes   = $orderService->getNotes($orderId);
         $notes   = array('note1', 'note2');
         $view    = $this->getView(false, array('notes' => $notes));
         return $view;
@@ -204,19 +209,6 @@ address;
         if (count($postParams)) {
         }
 
-    }
-
-    public function getView($layout=true, array $vars = null)
-    {
-        $view = new ViewModel();
-        if ($layout === false) {
-            $view->setTerminal(true);
-        }
-        if (is_array($vars)) {
-            $view->setVariables($vars);
-        }
-
-        return $view;
     }
 
     /**

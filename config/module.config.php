@@ -23,23 +23,24 @@ $config = array(
     ),
     'service_manager' => array(
         'shared' => array(
-            'speckorder_form_orderflags' => false,
+            'speckorder_form_ordertags' => false,
         ),
         'invokables' => array(
             'speckorder_service_orderservice' => 'SpeckOrder\Service\OrderService',
             'speckorder_event_placeholder'    => 'SpeckOrder\Event\PlaceHolder',
             'speckorder_event_order'          => 'SpeckOrder\Event\Order',
+            'speckorder_form_customersearch'  => 'SpeckOrder\Form\CustomerSearch',
         ),
         'factories' => array(
-            'speckorder_form_orderflags' => function ($sm) {
+            'speckorder_form_ordertags' => function ($sm) {
                 $orderService = $sm->get('speckorder_service_orderservice');
-                $opts['flags'] = $orderService->getAllFlags();
-                $form = new \SpeckOrder\Form\OrderFlags($opts);
+                $opts['tags'] = $orderService->getAllTags();
+                $form = new \SpeckOrder\Form\OrderTags($opts);
                 return $form;
             },
             'speckorder_form_ordersearch' => function ($sm) {
                 $orderService = $sm->get('speckorder_service_orderservice');
-                $opts['flags'] = $orderService->getAllFlags();
+                $opts['tags'] = $orderService->getAllTags();
                 $form = new \SpeckOrder\Form\OrderSearch($opts);
                 return $form;
             },
@@ -47,33 +48,34 @@ $config = array(
                 $config = array(
                     'view_order_placeholders' => array(
                         //relative to view directory
-                        'header'    => '/speck-order/order-management/order/placeholder/header',
                         'content_1' => '/speck-order/order-management/order/placeholder/content-1',
                         'content_2' => '/speck-order/order-management/order/placeholder/content-2',
                         'content_3' => '/speck-order/order-management/order/placeholder/content-3',
-                        'footer'    => '/speck-order/order-management/order/placeholder/footer',
                     ),
                     'search_form_fieldset_partials' => array(
                         //relative to view directory
-                        'filters' => '/speck-order/order-management/order/search/partial/search-filters',
-                        'default' => '/speck-order/order-management/order/search/partial/search-fieldset',
+                        'filters' => '/speck-order/order-management/search/partial/search-filters',
+                        'text'    => '/speck-order/order-management/search/partial/search-text',
+                        'default' => '/speck-order/order-management/search/partial/search-fieldset',
                     ),
                     'order_actions' => array(
                         'invoice' => array(
                             'type'  => 'uri',
-                            'uri'   => '/manage-order/{order_num}/invoice',
+                            'index' => 'invoice',
+                            'uri'   => '/manage-order/{order_id}/invoice',
                             'label' => 'View Invoice',
                             'title' => 'Invoice - Payment Due',
                         ),
                         'receipt' => array(
-                            'type' => 'uri',
+                            'type'  => 'uri',
+                            'index' => 'receipt',
                             'label' => 'View Receipt',
                             'title' => 'Payment Not Received',
                         ),
                     ),
                 );
                 $smConfig = $sm->get('Config');
-                if($smConfig['speckorder']) {
+                if(isset($smConfig['speckorder'])) {
                     $config = \Zend\Stdlib\ArrayUtils::merge($config, $smConfig['speckorder']);
                 }
                 return $config;
@@ -90,14 +92,18 @@ $config = array(
     'navigation' => array(
         'admin' => array(
             'manage-orders' => array(
-                'label' => 'Order Management',
-                'route' => 'manage-orders',
+                'label' => 'Orders',
+                'route' => 'zfcadmin/manage-orders',
+            ),
+            'manage-customers' => array(
+                'label' => 'Customers',
+                'route' => 'zfcadmin/manage-customers',
             ),
         ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            __DIR__ . '/../view'
+            __DIR__ . '/../view',
         ),
     ),
 );

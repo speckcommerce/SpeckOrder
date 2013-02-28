@@ -1,0 +1,24 @@
+<table class="pane-datatable table table-striped table-bordered" id="customers">
+    <thead>
+        <tr>
+            <th class="name">Name</th>
+            <th class="email">Email</th>
+            <th class="phone">Phone</th>
+            <th class="shipto">Address</th>
+            <th class="city">City</th>
+            <th class="state">Province</th>
+            <th class="zip">Postal Code</th>
+            <th class="country">Country</th>
+        </tr>
+    </thead>
+    <tbody>
+        <? foreach ($this->customers as $customer) : ?>
+            <?=$this->render('/speck-order/order-management/customer/row'); ?>
+        <? endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#search a[href="#search-customer"]').tab('show');
+    });
+</script>

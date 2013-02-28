@@ -17,14 +17,22 @@ class OrderSearch extends ZendForm
             'name' => 'order_number',
             'type' => '\Zend\Form\Element\Text',
             'options' => array(
-                'label' => 'Order Number',
+                'label' => 'Order #',
+            ),
+            'attributes' => array(
+                'placeholder' => 'Order #',
+                'class' => 'span12'
             ),
         ));
         $text->add(array(
             'name' => 'ref_num',
             'type' => '\Zend\Form\Element\Text',
             'options' => array(
-                'label' => 'Reference Number',
+                'label' => 'Reference #',
+            ),
+            'attributes' => array(
+                'placeholder' => 'Reference #',
+                'class' => 'span12'
             ),
         ));
         $text->add(array(
@@ -32,6 +40,10 @@ class OrderSearch extends ZendForm
             'type' => '\Zend\Form\Element\Text',
             'options' => array(
                 'label' => 'Status',
+            ),
+            'attributes' => array(
+                'placeholder' => 'Status',
+                'class' => 'span12'
             ),
         ));
         $text->add(array(
@@ -41,7 +53,8 @@ class OrderSearch extends ZendForm
                 'label' => 'Created: Start',
             ),
             'attributes' => array(
-                'id' => 'order_search_created_time_start'
+                'placeholder' => 'Created: Start',
+                'class' => 'span12 datepicker',
             ),
         ));
         $text->add(array(
@@ -51,7 +64,8 @@ class OrderSearch extends ZendForm
                 'label' => 'Created: End',
             ),
             'attributes' => array(
-                'id' => 'order_search_created_time_end'
+                'placeholder' => 'Created: End',
+                'class' => 'span12 datepicker',
             ),
         ));
 
@@ -59,13 +73,13 @@ class OrderSearch extends ZendForm
         $this->add($text);
 
         $this->add(new FieldSet('filters'));
-
         $buttons = new FieldSet('buttons');
         $buttons->add(array(
             'name' => 'submit',
             'type' => '\Zend\Form\Element\Submit',
             'attributes' => array(
                 'value' => 'Search',
+                'class' => 'span12',
             ),
         ));
         $this->add($buttons);
@@ -75,12 +89,12 @@ class OrderSearch extends ZendForm
     {
         foreach ($filters as $flagId => $label) {
             $name  = 'filters[' . $flagId . ']';
-            $radio = new Element\Radio($name);
-            $radio->setLabel($label);
-            $radio->setValueOptions(
-                array('ignore' => 'ignore','show' => 'show', 'hide' => 'hide')
-            );
-            $this->get('filters')->add($radio);
+            $filter = new Element\Text($name);
+            $filter->setLabel($label);
+            $filter->setAttribute('class', 'multivalue');
+            $filter->setAttribute('value', 'ignore');
+            $filter->setAttribute('data-values', "ignore,hide,show");
+            $this->get('filters')->add($filter);
         }
     }
 }

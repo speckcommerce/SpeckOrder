@@ -6,14 +6,14 @@ use Zend\Form\Form as ZendForm;
 use Zend\Form\FieldSet;
 use Zend\Form\Element;
 
-class OrderFlags extends ZendForm
+class OrderTags extends ZendForm
 {
     public function __construct($opts = array())
     {
         parent::__construct();
 
-        if (isset($opts['flags'])) {
-            $this->setFlags($opts['flags']);
+        if (isset($opts['tags'])) {
+            $this->setTags($opts['tags']);
         }
         $this->add(array(
             'name' => 'order_number',
@@ -23,15 +23,15 @@ class OrderFlags extends ZendForm
             'name' => 'submit',
             'type' => '\Zend\Form\Element\Submit',
             'attributes' => array(
-                'value' => 'Update Flags',
+                'value' => 'Update Tags',
             ),
         ));
     }
 
-    public function setFlags(array $flags)
+    public function setTags(array $tags)
     {
-        $el = new Element\MultiCheckbox('flags');
-        $el->setValueOptions($flags);
+        $el = new Element\MultiCheckbox('tags');
+        $el->setValueOptions($tags);
         $this->add($el);
     }
 }

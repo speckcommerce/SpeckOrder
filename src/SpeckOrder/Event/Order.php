@@ -15,9 +15,9 @@ class Order implements ServiceLocatorAwareInterface
         $vars = $e->getParam('order');
         $orderNum = '123456';
 
-        //if payment method completed
+        //if ($order->hasFlag('paid')) {
         if(true) {
-            $actions['receipt']['uri']   = '/manage-order/{order_num}/receipt';
+            $actions['receipt']['uri']   = '/manage-order/{order_id}/receipt';
         }
 
         return array(
