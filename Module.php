@@ -47,7 +47,7 @@ class Module
         $orderActions = $app->getServiceManager()->get('speckorder_event_order');
         $em->attach(
             'SpeckOrder\Controller\OrderManagementController',
-            'orderAction',
+            'orderAction.pre',
             array($orderActions, 'orderActions')
         );
     }

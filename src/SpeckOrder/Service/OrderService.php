@@ -47,6 +47,23 @@ class OrderService implements ServiceLocatorAwareInterface// ,OrderServiceInterf
         return $flags;
     }
 
+    public function getAllTags()
+    {
+        //$tags = $this->getMapper()->getAllTags();
+        $tags = array(
+            1 => 'International',
+            2 => 'Shipped',
+            3 => 'Canceled',
+            4 => 'Archived',
+            5 => 'Fraud',
+            6 => 'Paid',
+            7 => 'Completed',
+            8 => 'Follow Up',
+            9 => 'Rma Request',
+        );
+        return $tags;
+    }
+
 //    /**
 //     * findById
 //     *

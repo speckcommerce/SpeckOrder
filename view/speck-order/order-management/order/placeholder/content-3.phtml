@@ -1,4 +1,9 @@
 <strong>Cart Contents</strong>
+<?
+    // $items = $order->getLineItems();
+    // $options = array(//special view partial??);
+?>
+<?//=$this->lineItems($items, $options);?>
 <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="cart-items">
     <thead>
         <tr>
@@ -33,5 +38,32 @@
             <td>Unit Price</td>
             <td>Line Total</td>
         </tr>
+    </tbody>
+</table>
+<strong>Activity Log</strong>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="activity-log">
+<? $log = array(
+    array('header' => 'Date Time', 'content' => 'Flag Changed', 'footer' => 'this is the footer'),
+    array('header' => 'Date Time', 'content' => 'Flag Changed', 'footer' => 'this is the footer'),
+    array('header' => 'Date Time', 'content' => 'Flag Changed', 'footer' => 'this is the footer'),
+); ?>
+
+
+    <tbody>
+        <? foreach($log as $event) : ?>
+            <tr>
+                <td>
+                    <? if(isset($event['header']) && trim($event['header'])) :?>
+                        <p><strong><?=$event['header']; ?></strong></p>
+                    <? endif; ?>
+                    <? if(isset($event['content']) && trim($event['content'])) :?>
+                        <p><?=$event['content']; ?></p>
+                    <? endif; ?>
+                    <? if(isset($event['footer']) && trim($event['footer'])) :?>
+                        <p><?=$event['footer']; ?></p>
+                    <? endif; ?>
+                </td>
+            </tr>
+        <? endforeach; ?>
     </tbody>
 </table>

@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs">
+    <li class="active hide"><a data-toggle="tab" href="#search-order" id="tab-search-order">Orders</a></li>
+    <li class="hide"><a data-toggle="tab" href="#search-customer" id="tab-search-customer">Customers</a></li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane search-pane" id="search-customer">
+        <? $conf = array('attributes' => array('id' => 'customer-search', 'method' => 'POST', 'action' => '/admin/manage-customers')); ?>
+        <?=$this->speckOrder()->customerSearchForm(true, $conf); ?>
+    </div>
+    <div class="active tab-pane search-pane" id="search-order">
+        <? $conf = array('attributes' => array('id' => 'customer-search', 'method' => 'POST', 'action' => '/admin/manage-orders')); ?>
+        <?=$this->speckOrder()->orderSearchForm(true, $conf); ?>
+    </div>
+</div>

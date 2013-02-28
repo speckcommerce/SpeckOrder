@@ -1,40 +1,46 @@
-body { padding:0 }
-#orders td, #cart-items td {font-size:11px}
-.search-pane{
-    min-width:200px;
-}
-#order-search-panes{
-    margin:0; padding:0;
-}
-#order-management{
-    width:100%;
-}
-#order-management div{
-    vertical-align: top;
-}
+.pane-datatable td, #cart-items td {font-size:11px}
+
 .row-inline-block > * {
-    /* width:100%; */
     min-width:20px;
     vertical-align: top;
     display: inline-block;
 }
+
 #order-flags-form label{
     margin:0; font-size:11px; line-height:11px
 }
 
+.search-filters {
+    padding-left:10px;
+    padding-bottom:10px;
+}
 
-#orders tbody tr:hover td{
+#search-button {
+    position: absolute; top:55px; left:-3px;
+    border:1px solid #CCC;
+    border-left:0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    background: #EEE;
+    display:block;
+}
+#search-button i {
+    margin:40px;
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.pane-datatable{ margin-bottom:0 }
+.pane-datatable tbody tr:hover td{
     background: none repeat scroll 0 0 #DDEEFF;
 }
-#orders{ margin-bottom:0 }
 
-.search-filters .head{
-    width:100px;
-}
+#speck-order-layout { margin: 0 20px 0 40px; padding:0 }
 
-div.order_1 { margin-bottom:10px; width: 80%; float:left; }
-div.order_2 { margin-bottom:10px; width: 20%; float:left; }
-div.order_3 { border-top: 1px solid #DDDDDD; clear:both }
+i.multivalue.ignore { background-color: #FFF; }
+i.multivalue.show { background-color: #0F0; }
+i.multivalue.hide { background-color: #F00; }
 
 #cart-items th.item       { width:50% }
 #cart-items th.uom-qty    { width:30% }

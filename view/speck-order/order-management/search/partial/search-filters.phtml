@@ -1,0 +1,8 @@
+<div class="search-filters">
+<? if (count($filters)) : ?>
+    <strong>Hide/Show Filters</strong>
+    <? foreach ($filters as $filter) : ?>
+        <?=$this->formRow($filter); ?>
+    <? endforeach; ?>
+<? endif; ?>
+</div>

@@ -1,18 +1,48 @@
-<div class="row-fluid row-inline-block">
-    <div class="span5 address-block bill">
-        <strong>BILL TO:</strong>
-        <pre>
-            <?=$order['ship_address'];?>
-        </pre>
+
+<div class="span9">
+    <p><strong>Order Number:</strong> <? echo '123456'; ?></p>
+    <p><strong>Customer:</strong> <a href="/admin/manage-customer/12345"><? echo 'johnsmith@domain.tld'; ?></a></p>
+    <div class="row-fluid">
+        <div class="span6 address-block bill">
+            <strong>BILL TO:</strong>
+            <pre>
+                <?=$order['ship_address'];?>
+                <?//= $address->getShippingAddress(); ?>
+                <?//= $address->getFirstName() . " " . $address->getLastName() . "\n"; ?>
+                <?//= $address->getStreetAddress() . "\n" ?>
+                <?//= $address->getCity() . " " . $address->getProvince() . " " . $address->getPostalCode(); ?>
+            </pre>
+        </div>
+        <div class="span6 address-block ship">
+            <strong>SHIP TO:</strong>
+            <pre>
+                <?=$order['bill_address'];?>
+                <?//= $address->getBillingAddress(); ?>
+                <?//= $address->getFirstName() . " " . $address->getLastName() . "\n"; ?>
+                <?//= $address->getStreetAddress() . "\n" ?>
+                <?//= $address->getCity() . " " . $address->getProvince() . " " . $address->getPostalCode(); ?>
+            </pre>
+        </div>
     </div>
-    <div class="span5 address-block ship">
-        <strong>SHIP TO:</strong>
-        <pre>
-            <?=$order['bill_address'];?>
-        </pre>
+    <div class="row-fluid">
+        <div class="order-actions">
+            <div class="title">Actions / Reports</div>
+        <?= $this->navigation($this->actions)->menu(); ?>
+        </div>
     </div>
-</div><br/>
-<div class="row-fluid">
-    <strong>Actions / Reports</strong>
-    <?= $this->navigation($this->actions)->menu(); ?>
+</div>
+<div class="span3"><? //tags-flags ?>
+    <div class="row-fluid">
+        <div class="span6">
+            <strong>Flags</strong>
+            <?// foreach ($order->getFlags() as $flag) : ?>
+            <? foreach(array('asdf','foo', 'bar') as $flag) : ?>
+                <p><?=$flag;?></p>
+            <? endforeach; ?>
+        </div>
+        <div class="span6">
+            <strong>Tags</strong>
+            <?= $this->speckOrder()->orderTagsForm(null, array(4=>4), true); ?>
+        </div>
+    </div>
 </div>
