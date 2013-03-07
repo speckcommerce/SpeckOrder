@@ -1,5 +1,10 @@
+<?
+$title = 's123456';
+$this->headTitle()->set($title);
+?>
+
 <? foreach ($this->placeHolders as $id => $content) : ?>
-    <div class="placeholder" id="<?=$name;?>">
+    <div class="placeholder" id="<?=$id;?>">
         <?=$content;?>
     </div>
 <? endforeach; ?>

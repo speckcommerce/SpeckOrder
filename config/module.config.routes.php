@@ -24,13 +24,34 @@ return array(
                             ),
                         ),
                     ),
-                    'manage-order' => array(
+                    'order' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/manage-order/:orderId[/:actionName]',
+                            'route'    => '/order/:orderId',
                             'defaults' => array(
                                 'controller' => 'order_management',
                                 'action'     => 'order',
+                            ),
+                        ),
+                    ),
+                    'manage-order' => array(
+                        'type'  => 'Literal',
+                        'options' => array(
+                            'route' => '/manage-order',
+                            'defaults' => array(
+                                'controller' => 'order_management',
+                            ),
+                        ),
+                        'may_terminate' => false,
+                        'child_routes' => array(
+                            'edit-address' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route' => '/edit-address/:orderId',
+                                    'defaults' => array(
+                                        'action' => 'editAddress',
+                                    ),
+                                ),
                             ),
                         ),
                     ),

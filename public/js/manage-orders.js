@@ -8,10 +8,40 @@ function toggleSearch(){
     }
 }
 
+function toggleAddressBlockPanes(addressBlockEl) {
+    $(addressBlockEl).find('.address').toggle();
+    $(addressBlockEl).find('.edit').toggle();
+}
+
+function editAddress(addressBlockEl){
+    orderId = addressBlockEl.data('order_id')
+    data = { 'type' : addressBlockEl.data('address_type') }
+    $.post("/admin/manage-order/edit-address/" + orderId, data, function(html) {
+        $(addressBlockEl).find('.edit').html(html);
+    })
+}
+
 $(document).ready(function() {
 
     $('#search-button').click(function(){
         toggleSearch();
+    })
+
+    $('.address-block .address-cancel').live('click', function() {
+        block = $(this).parents('.address-block').first();
+        toggleAddressBlockPanes(block);
+    })
+
+    $('.address-block').find('form').live('submit', function(e) {
+        e.preventDefault();
+        block = $(this).parents('.address-block').first();
+        toggleAddressBlockPanes(block);
+    })
+
+    $('.address-block .edit-button').click(function(){
+        block = $(this).parents('.address-block').first()
+        toggleAddressBlockPanes(block);
+        editAddress(block);
     })
 
     $('.pane-datatable').dataTable( {
