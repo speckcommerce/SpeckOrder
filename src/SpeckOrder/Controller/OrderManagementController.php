@@ -71,6 +71,28 @@ address;
         return $order;
     }
 
+    public function editAddressAction()
+    {
+        //$orderId = $this->params('order_id');
+        //$type    = $this->params('type');
+
+        //$order = $this->getOrder($orderId);
+
+        //$getAddress = 'get' . ucfirst($type) . 'Address';
+        //$address    = $order->$getAddress();
+
+        $form = $this->getServiceLocator()->get('SpeckOrder\Form\EditAddress');
+        //$form->setAddress($address);
+
+        $view = new ViewModel(array('form' => $form));
+        $view->setTemplate('speck-order/order-management/order/address-edit')->setTerminal(true);
+
+
+        $renderer = $this->getServiceLocator()->get('zendviewrendererphprenderer');
+        $html = $renderer->render($view);
+        return $this->getResponse()->setContent($html);
+    }
+
     public function customerAction()
     {
         $this->initSubLayout();

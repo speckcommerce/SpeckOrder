@@ -32,6 +32,8 @@ $config = array(
             'speckorder_form_customersearch'  => 'SpeckOrder\Form\CustomerSearch',
         ),
         'factories' => array(
+            'SpeckOrder\Form\Address'         => 'SpeckOrder\Form\AddressFactory',
+            'SpeckOrder\Form\EditAddress'     => 'SpeckOrder\Form\EditAddressFactory',
             'speckorder_form_ordertags' => function ($sm) {
                 $orderService = $sm->get('speckorder_service_orderservice');
                 $opts['tags'] = $orderService->getAllTags();
