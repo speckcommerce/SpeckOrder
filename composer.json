@@ -13,6 +13,11 @@
             "name": "Aleksey Khudyakov",
             "email": "aleksey@xerkus.pro",
             "homepage": ""
+        },
+        {
+            "name": "Nigel Lundsten",
+            "email": "nigel.lundsten@gmail.com",
+            "homepage": ""
         }
     ],
     "require": {
