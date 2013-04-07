@@ -3,6 +3,7 @@
 return array(
     'modules' => array(
         'ZfcBase',
+        'SpeckCart',
         'SpeckOrder',
     ),
     'module_listener_options' => array(
