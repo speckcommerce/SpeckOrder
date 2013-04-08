@@ -25,6 +25,19 @@ class Order implements OrderInterface, EventManagerAwareInterface
         return $this->getOrderMapper()->findById($id);
     }
 
+    public function populate(Order $order)
+    {
+        $id = $order->getOrderId();
+        $flags = $this->getOrderFlagService()->getByOrderId($id);
+        $order->setFlags($flags);
+        $billing = $this->getOrderAddressService()->getById($id);
+        $order->setBillingAddress($billing);
+        $shipping = $this->getOrderAddressService()->getById($id);
+        $order->setShippingAddress($shipping);
+
+        return $order;
+    }
+
     /**
      * persist
      *

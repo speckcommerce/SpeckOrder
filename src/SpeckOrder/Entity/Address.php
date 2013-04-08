@@ -51,9 +51,9 @@ class Address extends BaseAddress
         return $this->company;
     }
 
-    public function setCompany($company)
+    public function setCompany($companyName)
     {
-        $this->company = $company;
+        $this->company = $companyName;
         return $this;
     }
 

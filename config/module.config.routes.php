@@ -2,6 +2,23 @@
 return array(
     'router' => array(
         'routes' => array(
+            'order' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/order',
+                ),
+                'may_terminate' => false,
+                'child_routes' => array(
+                    'process' => 'Literal',
+                    'options' => array(
+                        'route' => '/process',
+                        'defaults' => array(
+                            'controller' => 'order',
+                            'action'     => 'process',
+                        ),
+                    ),
+                ),
+            ),
             'zfcadmin' => array(
                 'child_routes' => array(
                     'manage-orders' => array(
