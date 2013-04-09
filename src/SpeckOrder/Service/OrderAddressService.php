@@ -2,13 +2,30 @@
 
 namespace SpeckOrder\Service;
 
+use SpeckOrder\Form\Address;
+use SpeckOrder\Entity\Address;
+
 class OrderAddressService
 {
     protected $mapper;
 
-    public function getById($addressId)
+    public function findById($addressId)
     {
-        return $this->getMapper()->getById($addressId);
+        return $this->getMapper()->findById($addressId);
+    }
+
+    public function persistForm(AddressForm $form)
+    {
+        $hydrator = $this->getMapper()->getHydrator();
+        $entity   = $this->getMapper()->getEntity();
+        $address  = $hydrator->hydrate($form->getData(), $entity);
+
+        return $this->persistEntity($address);
+    }
+
+    public function persistEntity(AddressEntity $address)
+    {
+        return $this->getMapper()->persist($address);
     }
 
     /**

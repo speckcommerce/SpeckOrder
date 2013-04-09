@@ -12,7 +12,7 @@ class Order implements OrderInterface
     protected $orderId;
     protected $refNum;
     protected $status;
-    protected $flags  = array();
+    protected $flags = array();
     protected $createdTime;
     protected $billingAddress;
     protected $shippingAddress;
