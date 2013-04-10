@@ -2,8 +2,8 @@
 
 namespace SpeckOrder\Service;
 
-use SpeckOrder\Form\Address;
-use SpeckOrder\Entity\Address;
+use SpeckOrder\Form\AddressForm;
+use SpeckOrder\Entity\AddressEntity;
 
 class OrderAddressService
 {
