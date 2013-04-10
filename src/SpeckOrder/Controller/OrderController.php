@@ -11,6 +11,8 @@ class OrderController extends AbstractActionController
     {
         die('<h2>Thanks for your order</h2><Br/>
             <h4> (under development) </h4>
-            once persistence is completed for speck-order, this will generate an order that can be viewed in the order management section of the admin area');
+            <p>After persistence is completed for speck-order, this will generate an order that can be viewed in the order management section of the admin area.</p>
+            <a href="/admin">Go to the admin area</a>
+            ');
     }
 }
