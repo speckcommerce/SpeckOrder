@@ -5,6 +5,7 @@ $config = array(
         'invokables' => array(
             'order_management'  => 'SpeckOrder\Controller\OrderManagementController',
             'order'             => 'SpeckOrder\Controller\OrderController',
+            'process-order'     => 'SpeckOrder\Controller\OrderController',
         ),
     ),
     'view_helpers' => array(
