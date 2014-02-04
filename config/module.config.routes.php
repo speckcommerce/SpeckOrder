@@ -9,15 +9,17 @@ return array(
                 ),
                 'may_terminate' => false,
                 'child_routes' => array(
-                    'process' => 'Literal',
-                    'options' => array(
-                        'route' => '/process',
-                        'defaults' => array(
-                            'controller' => 'order',
-                            'action'     => 'process',
-                        ),
-                    ),
-                ),
+          				'process' => array(
+	                        'type'    => 'Literal',
+	                        'options' => array(
+	                            'route'    => '/process',
+	                            'defaults' => array(
+	                                'controller' => 'order',
+	                                'action'     => 'index',
+	                            ),
+	                        ),
+	                    ),
+                  ),
             ),
             'zfcadmin' => array(
                 'child_routes' => array(
